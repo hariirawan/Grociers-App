@@ -9,7 +9,6 @@
  */
 
 import React from 'react';
-import {Text, TouchableOpacity, View} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import SplashScreen from './src/screens/SplashScreen';
@@ -21,10 +20,14 @@ import LogIn from './src/screens/LogIn';
 import SignUp from './src/screens/SignUp';
 import HomeScreen from './src/screens/HomeScreen';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import MyTabBar from './src/components/MyTabbar';
 import Orders from './src/screens/Orders';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
+import {black, green} from './src/constants/colors';
+import ProductDetail from './src/screens/ProductDetail';
+import ExploreScreen from './src/screens/ExploreScreen';
+import ExploreDetail from './src/screens/ExploreDetail';
+import FilterData from './src/screens/FilterData';
 
 const Stack = createNativeStackNavigator();
 
@@ -34,7 +37,11 @@ function BottomNavigator() {
   return (
     <Tab.Navigator
       initialRouteName="Home"
-      tabBar={props => <MyTabBar {...props} />}>
+      screenOptions={{
+        tabBarInactiveTintColor: black,
+        tabBarActiveTintColor: green,
+        headerShown: false,
+      }}>
       <Tab.Screen
         name="Home"
         component={HomeScreen}
@@ -45,7 +52,7 @@ function BottomNavigator() {
       />
       <Tab.Screen
         name="Explore"
-        component={Orders}
+        component={ExploreScreen}
         options={{
           tabBarLabel: 'Explore',
           tabBarIcon: ({color}) => (
@@ -102,6 +109,9 @@ const App = () => {
         <Stack.Screen name="LogIn" component={LogIn} />
         <Stack.Screen name="SignUp" component={SignUp} />
         <Stack.Screen name="HomeScreen" component={BottomNavigator} />
+        <Stack.Screen name="ProductDetail" component={ProductDetail} />
+        <Stack.Screen name="ExploreDetail" component={ExploreDetail} />
+        <Stack.Screen name="FilterData" component={FilterData} />
       </Stack.Navigator>
     </NavigationContainer>
   );
